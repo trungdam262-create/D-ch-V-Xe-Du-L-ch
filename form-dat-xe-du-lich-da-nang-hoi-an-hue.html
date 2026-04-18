@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Đặt xe du lịch Đà Nẵng - Hội An - Huế</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --text: #172033;
+      --muted: #63708a;
+      --primary: #0b63ce;
+      --primary-2: #0a4fa5;
+      --accent: #e9f3ff;
+      --border: #d9e3f0;
+      --ok: #0a7a40;
+      --warn: #b45309;
+      --shadow: 0 12px 35px rgba(18, 42, 76, .12);
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #eef5ff 0%, var(--bg) 320px);
+    }
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 22px;
+    }
+    .hero {
+      background: linear-gradient(135deg, #0b63ce, #0b7de0 58%, #59b4ff);
+      color: #fff;
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 1.35fr .9fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: 34px;
+      line-height: 1.15;
+    }
+    .hero p {
+      margin: 0 0 14px;
+      color: rgba(255,255,255,.94);
+      line-height: 1.6;
+    }
+    .hero-card {
+      background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 22px;
+      padding: 18px;
+      backdrop-filter: blur(6px);
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .contact-item {
+      background: rgba(255,255,255,.16);
+      border-radius: 16px;
+      padding: 12px 14px;
+      border: 1px solid rgba(255,255,255,.18);
+      line-height: 1.45;
+    }
+    .contact-item strong { display: block; margin-bottom: 4px; }
+    .top-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+    .btn {
+      appearance: none;
+      border: none;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform .15s ease, opacity .2s ease, background .2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary { background: #fff; color: var(--primary); }
+    .btn-secondary { background: rgba(255,255,255,.16); color: #fff; border: 1px solid rgba(255,255,255,.28); }
+    .btn-main { background: var(--primary); color: #fff; }
+    .btn-soft { background: var(--accent); color: var(--primary-2); }
+    .btn-outline { background: transparent; color: var(--primary-2); border: 1px solid var(--border); }
+    .grid {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 22px;
+      margin-top: 24px;
+    }
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(9, 50, 100, .06);
+      padding: 20px;
+    }
+    .card h2, .card h3 {
+      margin: 0 0 10px;
+      line-height: 1.25;
+    }
+    .sub {
+      color: var(--muted);
+      margin: 0 0 18px;
+      line-height: 1.6;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .field { display: flex; flex-direction: column; gap: 7px; }
+    .field.full { grid-column: 1 / -1; }
+    label {
+      font-weight: 700;
+      font-size: 14px;
+    }
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-size: 15px;
+      outline: none;
+      background: #fff;
+      color: var(--text);
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: #85b9ff;
+      box-shadow: 0 0 0 4px rgba(11, 99, 206, .08);
+    }
+    textarea { min-height: 92px; resize: vertical; }
+    .note-box {
+      border-radius: 14px;
+      padding: 12px 14px;
+      background: #fff7ed;
+      color: #92400e;
+      border: 1px solid #fed7aa;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+    .pricing-summary {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .pill {
+      background: #f8fbff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px;
+    }
+    .pill .label {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .pill .value {
+      font-size: 21px;
+      font-weight: 800;
+      color: var(--primary-2);
+      word-break: break-word;
+    }
+    .payment-box {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    .bank-info {
+      border: 1px dashed var(--border);
+      border-radius: 18px;
+      padding: 16px;
+      background: #fbfdff;
+    }
+    .bank-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 8px 0;
+      border-bottom: 1px solid #eef3f9;
+      font-size: 15px;
+    }
+    .bank-line:last-child { border-bottom: none; }
+    .bank-line strong { min-width: 120px; }
+    .qr-wrap {
+      text-align: center;
+      background: linear-gradient(180deg, #fafdff, #eff6ff);
+      border-radius: 18px;
+      padding: 18px;
+      border: 1px solid var(--border);
+    }
+    .qr-wrap img {
+      width: min(100%, 340px);
+      border-radius: 18px;
+      background: #fff;
+      border: 1px solid #e5edf8;
+      padding: 10px;
+      box-shadow: 0 10px 24px rgba(15, 47, 90, .08);
+    }
+    .qr-caption {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+    .helper-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
+      font-size: 15px;
+    }
+    .table-wrap {
+      overflow: auto;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: #fff;
+    }
+    th, td {
+      padding: 12px 14px;
+      border-bottom: 1px solid #edf2f9;
+      text-align: left;
+      white-space: nowrap;
+    }
+    th {
+      background: #f3f8ff;
+      color: var(--primary-2);
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+    tr:hover td { background: #fcfdff; }
+    .table-notes {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .list-box {
+      background: #fcfdff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px 16px;
+    }
+    .list-box h4 {
+      margin: 0 0 10px;
+      font-size: 16px;
+      color: var(--primary-2);
+    }
+    .list-box ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+    .muted-small {
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .footer {
+      margin: 28px 0 10px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .success {
+      background: #ecfdf3;
+      border: 1px solid #bbf7d0;
+      color: var(--ok);
+      border-radius: 14px;
+      padding: 12px 14px;
+      margin-top: 12px;
+      display: none;
+    }
+    @media (max-width: 980px) {
+      .hero, .grid { grid-template-columns: 1fr; }
+      .pricing-summary, .table-notes, .contact-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 720px) {
+      .container { padding: 14px; }
+      .hero { padding: 20px; border-radius: 22px; }
+      .hero h1 { font-size: 28px; }
+      .card { padding: 16px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .pricing-summary { grid-template-columns: 1fr; }
+      .bank-line { flex-direction: column; gap: 4px; }
+      .top-actions, .helper-row { flex-direction: column; }
+      .btn { width: 100%; }
+    }
+    @media print {
+      body { background: #fff; }
+      .container { max-width: none; padding: 0; }
+      .hero { background: #0b63ce !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .btn, .helper-row, .top-actions { display: none !important; }
+      .card, .hero { box-shadow: none; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="hero">
+      <div>
+        <h1>Form đặt xe du lịch<br>Đà Nẵng - Hội An - Huế</h1>
+        <p>Website dùng ngay cho báo giá và nhận đặt xe. Giá đã bao gồm <strong>xăng, tài xế, cầu đường</strong>. Hỗ trợ tuyến cố định, city tour và chuyến riêng theo yêu cầu.</p>
+        <div class="top-actions">
+          <a class="btn btn-primary" href="#dat-xe">Đặt xe & báo giá</a>
+          <a class="btn btn-secondary" href="#bang-gia">Xem bảng giá</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <h3 style="margin-top:0;">Liên hệ nhanh</h3>
+        <div class="contact-grid">
+          <div class="contact-item">
+            <strong>Số điện thoại</strong>
+            <a href="tel:0901292429" style="color:#fff; text-decoration:none;">0901.29.24.29</a>
+          </div>
+          <div class="contact-item">
+            <strong>Zalo / WhatsApp</strong>
+            <a href="https://wa.me/84901292429" target="_blank" rel="noopener" style="color:#fff; text-decoration:none;">0901.29.24.29</a>
+          </div>
+          <div class="contact-item" style="grid-column:1/-1;">
+            <strong>Email</strong>
+            <a href="mailto:dichvuxedulichphongthu@gmail.com" style="color:#fff; text-decoration:none;">dichvuxedulichphongthu@gmail.com</a>
+          </div>
+        </div>
+        <p class="muted-small" style="color:rgba(255,255,255,.9); margin:14px 0 0;">Phù hợp để gửi link cho khách, in báo giá hoặc lưu PDF trực tiếp từ trình duyệt.</p>
+      </div>
+    </section>
+
+    <section class="grid" id="dat-xe">
+      <div class="card">
+        <h2>Thông tin đặt xe</h2>
+        <p class="sub">Chọn tuyến, loại xe và thời gian di chuyển để hệ thống tự lên báo giá. Với <strong>Tour yêu cầu</strong>, bạn có thể nhập giá riêng để tạo mã thanh toán QR ngay.</p>
+
+        <form id="bookingForm" class="form-grid" onsubmit="event.preventDefault(); generateQuote();">
+          <div class="field">
+            <label for="customerName">Tên khách hàng</label>
+            <input id="customerName" type="text" placeholder="Nhập tên khách hàng" />
+          </div>
+          <div class="field">
+            <label for="customerPhone">Số điện thoại</label>
+            <input id="customerPhone" type="tel" placeholder="Ví dụ: 0901 292 429" />
+          </div>
+          <div class="field">
+            <label for="contactApp">Kênh liên hệ ưu tiên</label>
+            <select id="contactApp">
+              <option>Zalo</option>
+              <option>WhatsApp</option>
+              <option>Điện thoại</option>
+              <option>Email</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="customerEmail">Email khách</label>
+            <input id="customerEmail" type="email" placeholder="Nhập email nếu có" />
+          </div>
+          <div class="field full">
+            <label for="routeSelect">Tuyến đường / dịch vụ</label>
+            <select id="routeSelect"></select>
+          </div>
+          <div class="field">
+            <label for="vehicleType">Loại xe</label>
+            <select id="vehicleType">
+              <option value="4 chỗ">4 chỗ</option>
+              <option value="7 chỗ">7 chỗ</option>
+              <option value="16 chỗ">16 chỗ</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="pickupDate">Ngày đi</label>
+            <input id="pickupDate" type="date" />
+          </div>
+          <div class="field">
+            <label for="pickupTime">Giờ đón</label>
+            <input id="pickupTime" type="time" />
+          </div>
+          <div class="field">
+            <label for="passengers">Số khách</label>
+            <input id="passengers" type="number" min="1" placeholder="Ví dụ: 4" />
+          </div>
+          <div class="field full">
+            <label for="pickupPoint">Điểm đón</label>
+            <input id="pickupPoint" type="text" placeholder="Ví dụ: Sân bay Đà Nẵng / khách sạn / resort" />
+          </div>
+          <div class="field full">
+            <label for="dropoffPoint">Điểm trả</label>
+            <input id="dropoffPoint" type="text" placeholder="Ví dụ: Khách sạn / Hội An / Huế / điểm tham quan" />
+          </div>
+          <div class="field">
+            <label for="flightNo">Số chuyến bay / tàu xe</label>
+            <input id="flightNo" type="text" placeholder="Không bắt buộc" />
+          </div>
+          <div class="field">
+            <label for="customPrice">Giá tour yêu cầu (VNĐ)</label>
+            <input id="customPrice" type="number" min="0" placeholder="Chỉ nhập khi chọn Tour yêu cầu" />
+          </div>
+          <div class="field full">
+            <label for="note">Ghi chú</label>
+            <textarea id="note" placeholder="Lịch trình riêng, số vali, ghế em bé, đón nhiều điểm, lưu ý khác..."></textarea>
+          </div>
+          <div class="field full">
+            <div class="note-box">
+              <strong>Lưu ý:</strong> xe chạy sau 22h tính thêm 20%. Điểm đón / trả ngoài trung tâm có thể phát sinh phụ phí. Giá lễ, Tết có thể thay đổi. Hotline sẽ chốt lại báo giá chính xác trước khi xác nhận chuyến.
+            </div>
+          </div>
+          <div class="field full" style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button type="submit" class="btn btn-main">Tạo báo giá</button>
+            <button type="button" class="btn btn-soft" onclick="copyBookingText()">Sao chép nội dung</button>
+            <button type="button" class="btn btn-outline" onclick="printPage()">In / Xuất PDF</button>
+          </div>
+          <div id="copySuccess" class="success field full">Đã sao chép nội dung đặt xe vào bộ nhớ tạm.</div>
+        </form>
+      </div>
+
+      <div class="card">
+        <h2>Báo giá & thanh toán</h2>
+        <p class="sub">Mã QR được cập nhật theo tuyến và loại xe đã chọn. Khách chỉ cần quét mã để thanh toán chuyển khoản.</p>
+
+        <div class="pricing-summary">
+          <div class="pill">
+            <span class="label">Tuyến đã chọn</span>
+            <div class="value" id="summaryRoute">Sân Bay → Khách Sạn Đà Nẵng</div>
+          </div>
+          <div class="pill">
+            <span class="label">Loại xe</span>
+            <div class="value" id="summaryVehicle">4 chỗ</div>
+          </div>
+          <div class="pill">
+            <span class="label">Giá tạm tính</span>
+            <div class="value" id="summaryPrice">100.000 VNĐ</div>
+          </div>
+        </div>
+
+        <div class="payment-box">
+          <div class="bank-info">
+            <div class="bank-line"><strong>Ngân hàng</strong><span>ACB</span></div>
+            <div class="bank-line"><strong>Chủ tài khoản</strong><span>DAM QUANG TRUNG</span></div>
+            <div class="bank-line"><strong>Số tài khoản</strong><span id="accountNo">14385307</span></div>
+            <div class="bank-line"><strong>Nội dung CK</strong><span id="transferNote">DATXE 0901292429</span></div>
+            <div class="bank-line"><strong>Số tiền</strong><span id="transferAmount">100.000 VNĐ</span></div>
+            <div class="helper-row">
+              <button class="btn btn-soft" type="button" onclick="copyBankInfo()">Sao chép thông tin tài khoản</button>
+              <a class="btn btn-outline" id="whatsappBtn" href="https://wa.me/84901292429" target="_blank" rel="noopener">Nhắn WhatsApp</a>
+              <a class="btn btn-outline" id="emailBtn" href="mailto:dichvuxedulichphongthu@gmail.com">Gửi Email</a>
+            </div>
+          </div>
+
+          <div class="qr-wrap">
+            <img id="qrImage" alt="QR thanh toán ACB" src="https://img.vietqr.io/image/acb-14385307-compact2.png?amount=100000&addInfo=DATXE%200901292429&accountName=DAM%20QUANG%20TRUNG" />
+            <div class="qr-caption">Quét mã QR để chuyển khoản. Khách nên kiểm tra đúng <strong>ACB - DAM QUANG TRUNG - 14385307</strong> trước khi thanh toán.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="bang-gia" style="margin-top:22px;">
+      <h2>Bảng báo giá</h2>
+      <p class="sub">Giá đã bao gồm <strong>xăng, tài xế, cầu đường</strong>. Đơn vị: VNĐ.</p>
+      <div class="table-wrap">
+        <table id="priceTable">
+          <thead>
+            <tr>
+              <th>Tuyến đường</th>
+              <th>4 chỗ</th>
+              <th>7 chỗ</th>
+              <th>16 chỗ</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="table-notes">
+        <div class="list-box">
+          <h4>Ghi chú</h4>
+          <ul>
+            <li>Đơn vị: VNĐ.</li>
+            <li>Giá có thể thay đổi vào dịp lễ, Tết.</li>
+            <li>Liên hệ hotline để được báo giá chính xác.</li>
+            <li>Hỗ trợ chuyến riêng, lịch trình theo yêu cầu.</li>
+          </ul>
+        </div>
+        <div class="list-box">
+          <h4>Phụ phí</h4>
+          <ul>
+            <li>Xe chạy sau 22h tính thêm 20%.</li>
+            <li>Điểm đón / trả ngoài trung tâm có thể phát sinh phụ phí.</li>
+            <li>Tour theo yêu cầu sẽ được chốt giá theo lịch trình thực tế.</li>
+            <li>City Tours: tối thiểu 3 tiếng / giới hạn 50km.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <p class="footer">Website báo giá đặt xe du lịch Đà Nẵng - Hội An - Huế • Hotline / Zalo / WhatsApp: <a href="tel:0901292429">0901.29.24.29</a> • Email: <a href="mailto:dichvuxedulichphongthu@gmail.com">dichvuxedulichphongthu@gmail.com</a></p>
+  </div>
+
+  <script>
+    const prices = [
+      { route: 'Sân Bay → Khách Sạn Đà Nẵng', '4 chỗ': 100000, '7 chỗ': 130000, '16 chỗ': 300000 },
+      { route: 'Bến Xe → Khách Sạn Đà Nẵng', '4 chỗ': 130000, '7 chỗ': 180000, '16 chỗ': 350000 },
+      { route: 'Đà Nẵng → Phố Cổ Hội An', '4 chỗ': 230000, '7 chỗ': 270000, '16 chỗ': 400000 },
+      { route: 'Đà Nẵng → Vinpearl Nam Hội An', '4 chỗ': 400000, '7 chỗ': 450000, '16 chỗ': 550000 },
+      { route: 'Đà Nẵng → Bà Nà Hill (2 chiều)', '4 chỗ': 550000, '7 chỗ': 650000, '16 chỗ': 900000 },
+      { route: 'Đà Nẵng → Núi Thần Tài (2 chiều)', '4 chỗ': 650000, '7 chỗ': 750000, '16 chỗ': 1100000 },
+      { route: 'Đà Nẵng → Ngũ Hành Sơn (2 chiều)', '4 chỗ': 250000, '7 chỗ': 300000, '16 chỗ': 500000 },
+      { route: 'Đà Nẵng → Chùa Linh Ứng (2 chiều)', '4 chỗ': 250000, '7 chỗ': 300000, '16 chỗ': 500000 },
+      { route: 'Đà Nẵng → Thánh Địa Mỹ Sơn (2 chiều)', '4 chỗ': 800000, '7 chỗ': 900000, '16 chỗ': 1200000 },
+      { route: 'Phố Cổ Hội An → Vinpearl Nam Hội An', '4 chỗ': 200000, '7 chỗ': 250000, '16 chỗ': 350000 },
+      { route: 'Phố Cổ Hội An → Bà Nà Hill (2 chiều)', '4 chỗ': 900000, '7 chỗ': 1000000, '16 chỗ': 1200000 },
+      { route: 'Phố Cổ Hội An → Núi Thần Tài (2 chiều)', '4 chỗ': 1000000, '7 chỗ': 1100000, '16 chỗ': 1400000 },
+      { route: 'Phố Cổ Hội An → Chùa Linh Ứng (2 chiều)', '4 chỗ': 600000, '7 chỗ': 700000, '16 chỗ': 900000 },
+      { route: 'Phố Cổ Hội An → Ngũ Hành Sơn (2 chiều)', '4 chỗ': 450000, '7 chỗ': 550000, '16 chỗ': 750000 },
+      { route: 'Phố Cổ Hội An → Rừng Dừa Bảy Mẫu (2 chiều)', '4 chỗ': 200000, '7 chỗ': 240000, '16 chỗ': 350000 },
+      { route: 'Đà Nẵng → Huế City', '4 chỗ': 1700000, '7 chỗ': 1900000, '16 chỗ': 2400000 },
+      { route: 'Hội An → Huế City', '4 chỗ': 1800000, '7 chỗ': 2000000, '16 chỗ': 2600000 },
+      { route: 'City Tours (Tối thiểu 3 tiếng / giới hạn 50km)', '4 chỗ': 120000, '7 chỗ': 150000, '16 chỗ': 200000 },
+      { route: 'City Tours Ngày (12 tiếng / giới hạn 100km)', '4 chỗ': 1200000, '7 chỗ': 1400000, '16 chỗ': 1600000 },
+      { route: 'Tour yêu cầu', '4 chỗ': 0, '7 chỗ': 0, '16 chỗ': 0 }
+    ];
+
+    const routeSelect = document.getElementById('routeSelect');
+    const vehicleType = document.getElementById('vehicleType');
+    const customPriceInput = document.getElementById('customPrice');
+    const tbody = document.querySelector('#priceTable tbody');
+
+    function formatCurrency(value) {
+      const number = Number(value || 0);
+      return number.toLocaleString('vi-VN') + ' VNĐ';
+    }
+
+    function populateOptions() {
+      prices.forEach((item, index) => {
+        const opt = document.createElement('option');
+        opt.value = item.route;
+        opt.textContent = item.route;
+        if (index === 0) opt.selected = true;
+        routeSelect.appendChild(opt);
+      });
+    }
+
+    function populateTable() {
+      tbody.innerHTML = '';
+      prices.forEach((item) => {
+        if (item.route === 'Tour yêu cầu') return;
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${item.route}</td>
+          <td>${formatCurrency(item['4 chỗ'])}</td>
+          <td>${formatCurrency(item['7 chỗ'])}</td>
+          <td>${formatCurrency(item['16 chỗ'])}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function getSelectedPrice() {
+      const route = routeSelect.value;
+      const vehicle = vehicleType.value;
+      if (route === 'Tour yêu cầu') {
+        return Number(customPriceInput.value || 0);
+      }
+      const found = prices.find(item => item.route === route);
+      return found ? Number(found[vehicle] || 0) : 0;
+    }
+
+    function buildTransferNote() {
+      const phone = (document.getElementById('customerPhone').value || '0901292429').replace(/\D/g, '').slice(-8);
+      const route = routeSelect.value.replace(/[^\p{L}\p{N}]/gu, ' ').trim().split(/\s+/).slice(0, 4).join(' ');
+      const shortRoute = route || 'DATXE';
+      return `DATXE ${phone} ${shortRoute}`.trim().slice(0, 60);
+    }
+
+    function updatePricingUI() {
+      const route = routeSelect.value;
+      const vehicle = vehicleType.value;
+      const amount = getSelectedPrice();
+      const transferNote = buildTransferNote();
+      const qrUrl = `https://img.vietqr.io/image/acb-14385307-compact2.png?amount=${amount}&addInfo=${encodeURIComponent(transferNote)}&accountName=${encodeURIComponent('DAM QUANG TRUNG')}`;
+
+      document.getElementById('summaryRoute').textContent = route;
+      document.getElementById('summaryVehicle').textContent = vehicle;
+      document.getElementById('summaryPrice').textContent = formatCurrency(amount);
+      document.getElementById('transferAmount').textContent = formatCurrency(amount);
+      document.getElementById('transferNote').textContent = transferNote;
+      document.getElementById('qrImage').src = qrUrl;
+      document.getElementById('qrImage').alt = `QR thanh toán ${formatCurrency(amount)}`;
+      customPriceInput.disabled = route !== 'Tour yêu cầu';
+      customPriceInput.style.opacity = route !== 'Tour yêu cầu' ? '.65' : '1';
+
+      updateContactLinks();
+    }
+
+    function buildBookingMessage() {
+      const data = {
+        customerName: document.getElementById('customerName').value || 'Chưa nhập',
+        customerPhone: document.getElementById('customerPhone').value || 'Chưa nhập',
+        customerEmail: document.getElementById('customerEmail').value || 'Chưa nhập',
+        contactApp: document.getElementById('contactApp').value || 'Chưa nhập',
+        route: routeSelect.value,
+        vehicle: vehicleType.value,
+        pickupDate: document.getElementById('pickupDate').value || 'Chưa chọn',
+        pickupTime: document.getElementById('pickupTime').value || 'Chưa chọn',
+        passengers: document.getElementById('passengers').value || 'Chưa nhập',
+        pickupPoint: document.getElementById('pickupPoint').value || 'Chưa nhập',
+        dropoffPoint: document.getElementById('dropoffPoint').value || 'Chưa nhập',
+        flightNo: document.getElementById('flightNo').value || 'Không có',
+        note: document.getElementById('note').value || 'Không có',
+        amount: formatCurrency(getSelectedPrice()),
+        transferNote: buildTransferNote()
+      };
+
+      return [
+        'YÊU CẦU ĐẶT XE DU LỊCH',
+        `Khách hàng: ${data.customerName}`,
+        `Số điện thoại: ${data.customerPhone}`,
+        `Email: ${data.customerEmail}`,
+        `Kênh liên hệ ưu tiên: ${data.contactApp}`,
+        `Tuyến / dịch vụ: ${data.route}`,
+        `Loại xe: ${data.vehicle}`,
+        `Ngày đi: ${data.pickupDate}`,
+        `Giờ đón: ${data.pickupTime}`,
+        `Số khách: ${data.passengers}`,
+        `Điểm đón: ${data.pickupPoint}`,
+        `Điểm trả: ${data.dropoffPoint}`,
+        `Số chuyến bay / tàu xe: ${data.flightNo}`,
+        `Ghi chú: ${data.note}`,
+        `Giá tạm tính: ${data.amount}`,
+        `Nội dung chuyển khoản: ${data.transferNote}`
+      ].join('\n');
+    }
+
+    function updateContactLinks() {
+      const message = buildBookingMessage();
+      const whatsappUrl = `https://wa.me/84901292429?text=${encodeURIComponent(message)}`;
+      const mailUrl = `mailto:dichvuxedulichphongthu@gmail.com?subject=${encodeURIComponent('Yêu cầu đặt xe du lịch')}&body=${encodeURIComponent(message)}`;
+      document.getElementById('whatsappBtn').href = whatsappUrl;
+      document.getElementById('emailBtn').href = mailUrl;
+    }
+
+    function generateQuote() {
+      updatePricingUI();
+      window.scrollTo({ top: 250, behavior: 'smooth' });
+    }
+
+    async function copyBookingText() {
+      try {
+        await navigator.clipboard.writeText(buildBookingMessage());
+        const el = document.getElementById('copySuccess');
+        el.style.display = 'block';
+        setTimeout(() => { el.style.display = 'none'; }, 2200);
+      } catch (e) {
+        alert('Không thể sao chép tự động. Bạn hãy thử lại hoặc dùng trình duyệt khác.');
+      }
+    }
+
+    async function copyBankInfo() {
+      const content = [
+        'Ngân hàng: ACB',
+        'Chủ tài khoản: DAM QUANG TRUNG',
+        'Số tài khoản: 14385307',
+        `Số tiền: ${formatCurrency(getSelectedPrice())}`,
+        `Nội dung CK: ${buildTransferNote()}`
+      ].join('\n');
+      try {
+        await navigator.clipboard.writeText(content);
+        alert('Đã sao chép thông tin thanh toán.');
+      } catch (e) {
+        alert('Không thể sao chép thông tin thanh toán.');
+      }
+    }
+
+    function printPage() {
+      window.print();
+    }
+
+    routeSelect.addEventListener('change', updatePricingUI);
+    vehicleType.addEventListener('change', updatePricingUI);
+    customPriceInput.addEventListener('input', updatePricingUI);
+    document.getElementById('customerPhone').addEventListener('input', updatePricingUI);
+
+    populateOptions();
+    populateTable();
+    updatePricingUI();
+  </script>
+</body>
+</html>
